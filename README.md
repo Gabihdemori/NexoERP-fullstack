@@ -23,13 +23,6 @@ Desenvolvido como Trabalho de Conclusão de Curso (TCC) do curso **Técnico em D
 
 ---
 
-## 🧩 Modelagem e Documentação
-
-### 📌 Diagrama de Casos de Uso (DCU)
-![Casos de Uso](./docs/DCU.png)
-
-### 📌 Diagrama Entidade-Relacionamento (DER)
-![Diagrama DER](./docs/diagrama.png)
 
 ### 📌 Testes da API
 A documentação de testes automatizados e manuais da API está disponível em:
