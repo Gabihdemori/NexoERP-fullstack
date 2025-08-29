@@ -24,7 +24,7 @@ Desenvolvido como Trabalho de Conclusão de Curso (TCC) do curso **Técnico em D
 ### 📌 Testes da API
 A documentação de testes automatizados e manuais da API está disponível em:
 
-📄 [`docs/testes-api.pdf`](./docs/testes-api.pdf)
+📄 [`docs/testes-api.pdf`](./testes-api.pdf)
 
 Inclui:
 - Requisições e respostas (200, 400, 401, etc.)
