@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoERP - Vendas</title>
+    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="icon" type="image/png" href="imagens/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-placeholder"></div>
+                <h1>NexoERP</h1>
+            </div>
+            <div class="user-info">
+                <p>Usuário: Admin</p>
+                <p>Último acesso: hoje</p>
+            </div>
+        </header>
+
+        <!-- Menu de Navegação -->
+ <nav class="menu" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li><a href="produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li class="active"><a href="vendas.html" aria-current="page"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li><a href="estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="content">
+            <div class="page-header">
+                <h2>Gestão de Vendas</h2>
+                <button class="btn btn-primary" onclick="window.location.href='Nova Tabela/nova_venda.html'">
+                    <span class="icon">+</span> Nova Venda
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <td>ID Venda</td>
+                            <td>Data</td>
+                            <td>Cliente</td>
+                            <td>Status</td>
+                            <td>Valor Total</td>
+                            <td>Ações</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+        </footer>
+    </div>
+
+    <script src="js/vendas.js"></script>
+</body>
+</html>

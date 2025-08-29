@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Simplificado - Nova Venda</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="logo"><div class="logo-placeholder"></div><h1>ERP Simplificado</h1></div>
+        <div class="user-info"></div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="../index.html">Dashboard</a></li>
+            <li><a href="../usuarios.html">Usuários</a></li>
+            <li><a href="../clientes.html">Clientes</a></li>
+            <li><a href="../produtos.html">Produtos</a></li>
+            <li class="active"><a href="../vendas.html">Vendas</a></li>
+            <li><a href="../estoque.html">Estoque</a></li>
+            <li><a href="relatorios.html">Relatórios</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <div class="page-header"><h2>Nova Venda</h2></div>
+
+        <div class="form-card">
+            <form id="sale-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cliente">Cliente</label>
+                        <select id="cliente" name="cliente" required>
+                            <option value="">Selecione um cliente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" id="data" name="data" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>Itens da Venda</label>
+                        <div class="sale-items"></div>
+                        <button type="button" class="btn btn-secondary" id="add-item">+ Adicionar Item</button>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="desconto">Desconto (R$)</label>
+                        <input type="number" id="desconto" name="desconto" step="0.01" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="total">Total da Venda</label>
+                        <input type="text" id="total" name="total" value="R$ 0,00" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="observacoes">Observações</label>
+                        <textarea id="observacoes" name="observacoes" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='vendas.html'">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Finalizar Venda</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>ERP Simplificado © 2025 - Versão 1.6</p>
+        <p>Sistema desenvolvido para pequenas e médias empresas</p>
+    </footer>
+</div>
+
+<script src="../js/nova_venda.js"></script>
+</body>
+</html>

@@ -39,10 +39,10 @@ Inclui:
 ### 📥 Clonando o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/NexoERP-fullstack.git
-cd backend
+git clone https://github.com/Gabihdemori/NexoERP-fullstack.git
+cd Fullstack
+cd Back
+cd api
 npm install
-npx prisma generate
-npx prisma migrate dev
-npm run dev
+nodemon
 

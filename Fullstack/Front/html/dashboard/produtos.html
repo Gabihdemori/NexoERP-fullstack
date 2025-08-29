@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoERP - Produtos</title>
+    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="icon" type="image/png" href="imagens/favicon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-placeholder"></div>
+                <h1>NexoERP</h1>
+            </div>
+            <div class="user-info">
+                <p>Usuário: Admin</p> <p>Último acesso: hoje</p> </div>
+        </header>
+
+        <nav class="menu" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li class="active"><a href="produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li><a href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li><a href="estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="page-header">
+                <h2>Gestão de Produtos</h2>
+                <a href="Nova Tabela/novo_produto.html" class="btn btn-primary">
+                    <span class="icon"><i class="fas fa-plus"></i></span> Novo Produto </a>
+            </div> 
+           <div id="lista-produtos">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Estoque</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- As linhas da tabela serão preenchidas dinamicamente pelo JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+        </footer>
+    </div>
+
+    <script src="../../js/produtos.js"></script>
+</body>
+</html>

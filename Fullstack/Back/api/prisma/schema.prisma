@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Perfil {
+  Admin
+  Gerente
+  Operador
+}
+
+model Usuario {
+  id           Int        @id @default(autoincrement())
+  nome         String     @unique
+  email        String     @unique
+  senha        String
+  perfil       Perfil     @default(Operador)
+  clientes     Cliente[]
+  vendas       Venda[]
+  criadoEm     DateTime   @default(now())
+  atualizadoEm DateTime   @updatedAt
+  ultimoAcesso DateTime?  
+}
+model Cliente {
+  id           Int        @id @default(autoincrement())
+  nome         String
+  email        String     @unique
+  telefone     String     @unique
+  cpf          String?    @unique
+  cnpj         String?    @unique
+
+  cep          String?
+  rua          String?
+  numero       String?
+  complemento  String?
+  bairro       String?
+  cidade       String?
+  estado       String?
+
+  observacoes  String?
+
+  usuarioId    Int
+  usuario      Usuario    @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  vendas       Venda[]
+
+  criadoEm     DateTime   @default(now())
+  atualizadoEm DateTime   @updatedAt
+}
+
+enum TipoProduto {
+  Produto
+  Servico
+}
+enum StatusProduto {
+  Ativo
+  Inativo
+}
+
+model Produto {
+  id           Int        @id @default(autoincrement())
+  nome         String
+  descricao    String?
+  preco        Float
+  estoque      Int
+  tipo         TipoProduto @default(Produto)
+  status       StatusProduto @default(Ativo)
+  itensVenda   ItemVenda[]
+  criadoEm     DateTime   @default(now())
+  atualizadoEm DateTime   @updatedAt
+}
+
+model Venda {
+  id           Int        @id @default(autoincrement())
+  clienteId    Int
+  usuarioId    Int
+  data         DateTime   @default(now())
+  total        Float
+  status       StatusVenda
+  itens        ItemVenda[]
+  cliente      Cliente    @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  usuario      Usuario    @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  relatorio    RelatorioVenda?
+}
+
+enum StatusVenda {
+  Concluida
+  Pendente
+  Cancelada
+}
+
+model ItemVenda {
+  id           Int        @id @default(autoincrement())
+  vendaId      Int
+  produtoId    Int
+  quantidade   Int
+  precoUnit    Float
+  venda        Venda      @relation(fields: [vendaId], references: [id], onDelete: Cascade)
+  produto      Produto    @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+}
+
+model RelatorioVenda {
+  id             Int       @id @default(autoincrement())
+  vendaId        Int       @unique
+  dataRelatorio  DateTime  @default(now())
+  observacoes    String?
+
+  criadoEm       DateTime  @default(now())
+  atualizadoEm   DateTime  @default(now())
+
+  venda          Venda     @relation(fields: [vendaId], references: [id], onDelete: Cascade)
+}

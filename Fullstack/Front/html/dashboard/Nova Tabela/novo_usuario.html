@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Simplificado - Novo Usuário</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-placeholder"></div>
+                <h1>ERP Simplificado</h1>
+            </div>
+            <div class="user-info">
+                <p>Usuário: Admin</p>
+                <p>Último acesso: hoje</p>
+            </div>
+        </header>
+
+        <!-- Menu de Navegação -->
+        <nav class="menu">
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="active"><a href="../usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="../clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li><a href="../produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li><a href="../vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li><a href="../estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="../relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="content">
+            <div class="page-header">
+                <h2>Novo Usuário</h2>
+            </div>
+
+            <div class="form-card">
+                <form id="user-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="perfil">Perfil</label>
+                            <select id="perfil" name="perfil" required>
+                                <option value="">Selecione um perfil</option>
+                                <option value="Admin">Administrador</option>
+                                <option value="Gerente">Gerente</option>
+                                <option value="Operador">Operador</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input type="password" id="senha" name="senha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" name="status" required>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                        <div class="form-group"></div> <!-- Espaço vazio para alinhamento -->
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='usuarios.html'">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+        </footer>
+    </div>
+
+    <script src="../../../js/novo_usuario.js"></script>
+</body>
+</html>

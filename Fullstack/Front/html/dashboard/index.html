@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoERP - Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="imagens/favicon.png">
+    <meta name="description" content="Sistema ERP completo para gestão de negócios">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho com ARIA labels para acessibilidade -->
+        <header class="header" role="banner" aria-label="Cabeçalho do sistema">
+            <div class="logo" aria-label="Logo da empresa">
+                <div class="logo-placeholder" role="img" aria-label="Logotipo NexoERP"></div>
+                <h1>NexoERP</h1>
+            </div>
+
+           <div id="userInfo" class="user-info">
+           <p><strong>Usuário:</strong> <span id="userName"></span></p>
+           <p><strong>Último acesso:</strong> <span id="lastAccess"></span></p>
+           </div>
+        </header>
+
+        <!-- Navegação principal -->
+        <nav class="menu" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li class="active"><a href="index.html" aria-current="page"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li><a href="produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li><a href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li><a href="estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo principal -->
+        <main class="content" role="main">
+            <section class="welcome-hero animate-fade-in-up" aria-label="Boas-vindas">
+                <div class="welcome-content">
+                    <h1>Olá, <span id="username-display">Bem vindo de volta!</span>!</h1>
+                    <p class="welcome-tagline">Sua central de controle do NexoERP está pronta para você.</p>
+                    <p class="welcome-note">Fique por dentro das notificações mais importantes.</p>
+                </div>
+            </section>
+
+            <section class="key-metrics-grid animate-fade-in-up animate-delay-1" aria-label="Métricas-chave">
+                <article class="metric-card animate-scale-in animate-delay-1-5" aria-label="Vendas do dia">
+                    <i class="fas fa-sack-dollar metric-icon" aria-hidden="true"></i>
+                    <h4>Vendas do Dia</h4>
+                    <p class="metric-value">R$ <span id="daily-sales-value">0,00</span></p>
+
+                </article>
+                
+                <article class="metric-card animate-scale-in animate-delay-2" aria-label="Novos clientes">
+                    <i class="fas fa-users metric-icon" aria-hidden="true"></i>
+                    <h4>Novos Clientes</h4>
+                    <p class="metric-value"><span id="new-clients-value">3</span></p>
+                </article>
+                
+                <article class="metric-card animate-scale-in animate-delay-2-5" aria-label="Produtos em estoque">
+                    <i class="fas fa-boxes metric-icon" aria-hidden="true"></i>
+                    <h4>Produtos em Estoque</h4>
+                    <p class="metric-value"><span id="stock-products-value">124</span></p>
+                </article>
+            </section>
+
+            <section class="dashboard-grid" aria-label="Painel de notificações">
+                <article class="dashboard-card animate-scale-in animate-delay-3 dashboard-card-alerts">
+                    <h3><i class="fas fa-bell" aria-hidden="true"></i> Notificações Importantes</h3>
+                    <div class="card-content">
+                        <div class="alert warning animate-bounce-fade-in" role="alert" aria-label="Alerta de estoque baixo">
+                            <p>Produto "Mouse Sem Fio" com estoque baixo (5 unidades)</p>
+                            <button class="alert-action-btn" onclick="location.href='estoque.html'">Revisar Estoque</button>
+                        </div>
+                        <div class="alert info animate-bounce-fade-in animate-delay-3-5" role="alert" aria-label="Notificação de novo cliente">
+                            <p>Novo cliente "Empresa XYZ" cadastrado hoje.</p>
+                            <button class="alert-action-btn" onclick="location.href='clientes.html'">Ver Clientes</button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <!-- Rodapé com informações adicionais -->
+        <footer class="footer animate-fade-in" role="contentinfo">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+            <p class="footer-links">
+                <a href="politica-privacidade.html">Política de Privacidade</a> | 
+                <a href="termos-uso.html">Termos de Uso</a> | 
+                <a href="suporte.html">Suporte</a>
+            </p>
+        </footer>
+        
+
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>

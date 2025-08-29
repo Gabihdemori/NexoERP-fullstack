@@ -1,0 +1,89 @@
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoERP - Estoque</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="imagens/favicon.png">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class="header"> 
+            <div class="logo">
+                <div class="logo-placeholder"></div>
+                <h1>NexoERP</h1>
+            </div>
+            <div class="user-info">
+                <p>Usuário: Admin</p>
+                <p>Último acesso: hoje</p>
+            </div>
+        </header>
+
+      <nav class="menu" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html" aria-current="page"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li><a href="produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li><a href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li class="active"><a href="estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="page-header">
+                <h2>Gestão de Estoque</h2>
+                <button class="btn btn-primary" onclick="window.location.href='Nova Tabela/novo_produto.html'">
+                    <span class="icon">+</span> Nova Entrada
+                </button>
+            </div>
+
+            <div class="inventory-summary">
+                <div class="summary-card">
+                    <h3>Total de Itens</h3>
+                    <p class="value">124</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Valor Total</h3>
+                    <p class="value">R$ 28.750,00</p>
+                </div>
+                <div class="summary-card warning">
+                    <h3>Itens com Baixo Estoque</h3>
+                    <p class="value">3</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Produto</th>
+                            <th>Descrição</th>
+                            <th>Quantidade</th>
+                            <th>Valor Unitário</th>
+                            <th>Valor Total</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+        </footer>
+    </div>
+
+    <script src="../../js/estoque.js"></script>
+</body>
+</html>

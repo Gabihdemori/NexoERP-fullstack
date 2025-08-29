@@ -1,0 +1,75 @@
+/* Variáveis CSS para temas */
+:root {
+    --color-bg: #f5f7fa;
+    --color-text: #333;
+    --color-primary: #3498db;
+    --color-card: #ffffff;
+    --color-border: #eee;
+}
+
+[data-theme="dark"] {
+    --color-bg: #121212;
+    --color-text: #e0e0e0;
+    --color-primary: #2a4b6c;
+    --color-card: #1e1e1e;
+    --color-border: #333;
+}
+
+/* Aplicação das variáveis */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header, .menu, .content, .footer,
+.dashboard-card, .metric-card {
+    background-color: var(--color-card);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+/* Botão de alternância */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos específicos para o modo escuro */
+[data-theme="dark"] .welcome-hero {
+    background: linear-gradient(135deg, #1a2b3c, #2a4b6c);
+}
+
+[data-theme="dark"] .alert {
+    background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .alert.warning {
+    background-color: #332a00;
+    border-left: 5px solid #ffc107;
+    color: #ffc107;
+}
+
+[data-theme="dark"] .alert.info {
+    background-color: #002733;
+    border-left: 5px solid #17a2b8;
+    color: #17a2b8;
+}

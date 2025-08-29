@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoERP - Relatórios Avançados</title>
+    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="icon" type="image/png" href="imagens/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script type="module" src="js/auth.js"></script>
+    <!-- Ícones -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-placeholder"></div>
+                <h1>NexoERP</h1>
+            </div>
+            <div class="user-info"></div>
+        </header>
+
+         <nav class="menu" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i> Usuários</a></li>
+                <li><a href="clientes.html"><i class="fas fa-address-book"></i> Clientes</a></li>
+                <li><a href="produtos.html"><i class="fas fa-box-open"></i> Produtos</a></li>
+                <li><a href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a></li>
+                <li><a href="estoque.html"><i class="fas fa-warehouse"></i> Estoque</a></li>
+                <li><a href="relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="page-header">
+                <h2>Relatórios Avançados</h2>
+                <div class="header-actions">
+                    <button id="save-template" class="btn btn-secondary">
+                        <i class="fas fa-save"></i> Salvar Template
+                    </button>
+                    <button id="export-pdf" class="btn btn-primary">
+                        <i class="fas fa-file-pdf"></i> Exportar PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="report-container">
+                <div class="report-sidebar">
+                    <div class="report-categories">
+                        <h3>Categoria</h3>
+                        <ul>
+                            <li class="active" data-category="vendas"><i class="fas fa-shopping-cart"></i> Vendas</li>
+                         
+                        </ul>
+                    </div>
+
+                    <div class="report-options">
+                        <h3>Opções</h3>
+                        <form id="report-filters">
+                            <div class="form-group">
+                                <label for="report-type">Tipo de Relatório</label>
+                                <select id="report-type" class="report-type-select">
+                                    <option value="">Selecione um relatório</option>
+                                    <option value="vendas-por-periodo">Vendas por Período</option>
+                                    <option value="produtos-mais-vendidos">Produtos Mais Vendidos</option>
+                                    <option value="vendas-por-vendedor">Vendas por Vendedor</option>
+                                    <option value="clientes-ativos">Clientes Ativos</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group date-range">
+                                <label>Período</label>
+                                <div class="date-inputs">
+                                    <input type="text" id="start-date" class="datepicker" placeholder="Data Início" value="01/07/2025">
+                                    <span>até</span>
+                                    <input type="text" id="end-date" class="datepicker" placeholder="Data Fim" value="15/07/2025">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="group-by">Agrupar por</label>
+                                <select id="group-by" class="group-by-select">
+                                    <option value="">Nenhum</option>
+                                    <option value="dia">Dia</option>
+                                    <option value="semana">Semana</option>
+                                    <option value="mes">Mês</option>
+                                    <option value="vendedor">Vendedor</option>
+                                    <option value="cliente">Cliente</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filter-by">Filtrar por</label>
+                                <select id="filter-by" class="filter-by-select">
+                                    <option value="">Nenhum</option>
+                                    <option value="vendedor">Vendedor</option>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="produto">Produto</option>
+                                    <option value="status">Status</option>
+                                </select>
+                            </div>
+
+                            <div id="dynamic-filters">
+                                <!-- Filtro dinâmico para Vendedor -->
+                                <div class="form-group dynamic-filter" data-filter="vendedor">
+                                    <label for="filter-vendedor">Vendedor</label>
+                                    <select id="filter-vendedor" class="dynamic-filter-input">
+                                        <option value="">Todos</option>
+                                        <option value="1">João Silva</option>
+                                        <option value="2">Maria Souza</option>
+                                        <option value="3">Carlos Oliveira</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Filtro dinâmico para Status -->
+                                <div class="form-group dynamic-filter" data-filter="status">
+                                    <label for="filter-status">Status</label>
+                                    <select id="filter-status" class="dynamic-filter-input">
+                                        <option value="">Todos</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="pendente">Pendente</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-generate">
+                                <i class="fas fa-sync-alt"></i> Gerar Relatório
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <div class="report-toolbar">
+                        <div class="view-options">
+                            <button class="btn-view active" data-view="table">
+                                <i class="fas fa-table"></i> Tabela
+                            </button>
+                            <button class="btn-view" data-view="chart">
+                                <i class="fas fa-chart-bar"></i> Gráfico
+                            </button>
+                            <button class="btn-view" data-view="both">
+                                <i class="fas fa-columns"></i> Ambos
+                            </button>
+                        </div>
+                        <div class="chart-type">
+                            <select id="chart-type-select">
+                                <option value="bar"><i class="fas fa-chart-bar"></i> Barras</option>
+                                <option value="line"><i class="fas fa-chart-line"></i> Linhas</option>
+                                <option value="pie"><i class="fas fa-chart-pie"></i> Pizza</option>
+                                <option value="donut"><i class="fas fa-chart-pie"></i> Rosca</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="report-results">
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Gerando relatório...</p>
+                        </div>
+
+                        <div class="report-summary">
+                            <div class="summary-cards">
+                                <div class="summary-card total">
+                                    <h4>Total de Vendas</h4>
+                                    <p class="value">R$ 28.750,00</p>
+                                </div>
+                                <div class="summary-card count">
+                                    <h4>Nº de Vendas</h4>
+                                    <p class="value">42</p>
+                                </div>
+                                <div class="summary-card">
+                                    <h4>Ticket Médio</h4>
+                                    <p class="value">R$ 684,52</p>
+                                </div>
+                                <div class="summary-card">
+                                    <h4>Clientes Ativos</h4>
+                                    <p class="value">15</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="data-table report-table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Nº Venda</th>
+                                        <th>Cliente</th>
+                                        <th>Vendedor</th>
+                                        <th>Produtos</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15/07/2025</td>
+                                        <td>#1042</td>
+                                        <td>Empresa ABC Ltda</td>
+                                        <td>Maria Souza</td>
+                                        <td>3</td>
+                                        <td>R$ 2.850,00</td>
+                                        <td><span class="status-badge active">Concluído</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>14/07/2025</td>
+                                        <td>#1041</td>
+                                        <td>João da Silva</td>
+                                        <td>Carlos Oliveira</td>
+                                        <td>2</td>
+                                        <td>R$ 1.200,00</td>
+                                        <td><span class="status-badge active">Concluído</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>14/07/2025</td>
+                                        <td>#1040</td>
+                                        <td>Maria Souza</td>
+                                        <td>João Silva</td>
+                                        <td>5</td>
+                                        <td>R$ 3.450,00</td>
+                                        <td><span class="status-badge warning">Pendente</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13/07/2025</td>
+                                        <td>#1039</td>
+                                        <td>Tech Solutions</td>
+                                        <td>Maria Souza</td>
+                                        <td>1</td>
+                                        <td>R$ 4.200,00</td>
+                                        <td><span class="status-badge active">Concluído</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12/07/2025</td>
+                                        <td>#1038</td>
+                                        <td>Global Corp</td>
+                                        <td>Carlos Oliveira</td>
+                                        <td>4</td>
+                                        <td>R$ 5.750,00</td>
+                                        <td><span class="status-badge active">Concluído</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="report-chart"></canvas>
+                        </div>
+
+                        <div class="no-results">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Selecione as opções e gere um relatório</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>ERP Simplificado © 2025 - Versão 1.6</p>
+            <p>Sistema desenvolvido para pequenas e médias empresas</p>
+        </footer>
+    </div>
+
+    <!-- Bibliotecas externas -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <script src="js/reports.js"></script>
+    <script>
+// Configuração inicial
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar datepickers
+    flatpickr(".datepicker", {
+        dateFormat: "d/m/Y",
+        locale: "pt",
+        defaultDate: new Date()
+    });
+
+    // Definir período padrão (últimos 7 dias)
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 7);
+    
+    document.getElementById('start-date')._flatpickr.setDate(startDate);
+    document.getElementById('end-date')._flatpickr.setDate(endDate);
+
+    // Configurar eventos
+    setupReportTypeSelect();
+    setupViewOptions();
+    setupFormSubmission();
+    generateSampleReport(); // Gerar relatório inicial
+});
+
+function setupReportTypeSelect() {
+    const reportTypeSelect = document.getElementById('report-type');
+    
+    reportTypeSelect.addEventListener('change', function() {
+        const reportType = this.value;
+        updateGroupByOptions(reportType);
+        updateFilterByOptions(reportType);
+        document.getElementById('dynamic-filters').innerHTML = '';
+    });
+}
+
+function updateGroupByOptions(reportType) {
+    const groupBySelect = document.getElementById('group-by');
+    groupBySelect.innerHTML = '<option value="">Nenhum</option>';
+    
+    const options = {
+        'vendas-por-periodo': ['dia', 'semana', 'mês', 'vendedor', 'cliente', 'produto'],
+        'produtos-mais-vendidos': ['produto', 'categoria', 'vendedor'],
+        'vendas-por-vendedor': ['vendedor', 'dia', 'semana', 'mês'],
+        'clientes-ativos': ['cliente', 'categoria', 'região']
+    }[reportType] || [];
+    
+    options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        opt.textContent = formatOptionText(option);
+        groupBySelect.appendChild(opt);
+    });
+}
+
+function updateFilterByOptions(reportType) {
+    const filterBySelect = document.getElementById('filter-by');
+    filterBySelect.innerHTML = '<option value="">Nenhum</option>';
+    
+    const options = {
+        'vendas-por-periodo': ['vendedor', 'cliente', 'produto', 'status'],
+        'produtos-mais-vendidos': ['categoria', 'vendedor', 'periodo'],
+        'vendas-por-vendedor': ['cliente', 'status', 'periodo'],
+        'clientes-ativos': ['categoria', 'região', 'status']
+    }[reportType] || [];
+    
+    options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        opt.textContent = formatOptionText(option);
+        filterBySelect.appendChild(opt);
+    });
+    
+    filterBySelect.addEventListener('change', function() {
+        updateDynamicFilters(this.value);
+    });
+}
+
+function updateDynamicFilters(filterType) {
+    const container = document.getElementById('dynamic-filters');
+    container.innerHTML = '';
+    
+    if (!filterType) return;
+    
+    const filterDiv = document.createElement('div');
+    filterDiv.className = 'form-group dynamic-filter';
+    filterDiv.dataset.filter = filterType;
+    
+    const label = document.createElement('label');
+    label.textContent = formatOptionText(filterType);
+    label.htmlFor = `filter-${filterType}`;
+    
+    let input;
+    
+    if (['status', 'categoria', 'região'].includes(filterType)) {
+        input = document.createElement('select');
+        input.id = `filter-${filterType}`;
+        input.className = 'dynamic-filter-input';
+        
+        const options = {
+            'status': ['todos', 'concluído', 'pendente', 'cancelado'],
+            'categoria': ['todos', 'eletrônicos', 'informática', 'escritório'],
+            'região': ['todos', 'sudeste', 'sul', 'nordeste']
+        }[filterType] || [];
+        
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt;
+            option.textContent = formatOptionText(opt);
+            input.appendChild(option);
+        });
+    } else {
+        input = document.createElement('input');
+        input.type = 'text';
+        input.id = `filter-${filterType}`;
+        input.className = 'dynamic-filter-input';
+        input.placeholder = `Filtrar por ${formatOptionText(filterType)}`;
+    }
+    
+    filterDiv.appendChild(label);
+    filterDiv.appendChild(input);
+    container.appendChild(filterDiv);
+}
+
+function setupViewOptions() {
+    const viewButtons = document.querySelectorAll('.btn-view');
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            updateView(this.dataset.view);
+        });
+    });
+    
+    document.getElementById('chart-type-select').addEventListener('change', function() {
+        if (window.currentChart) {
+            renderChart(window.currentChartData, this.value);
+        }
+    });
+}
+
+function updateView(viewType) {
+    const chartTypeSelect = document.querySelector('.chart-type');
+    const tableContainer = document.querySelector('.table-container');
+    const chartContainer = document.querySelector('.chart-container');
+    
+    switch(viewType) {
+        case 'table':
+            chartTypeSelect.style.display = 'none';
+            tableContainer.style.display = 'block';
+            chartContainer.style.display = 'none';
+            break;
+        case 'chart':
+            chartTypeSelect.style.display = 'flex';
+            tableContainer.style.display = 'none';
+            chartContainer.style.display = 'block';
+            break;
+        case 'both':
+            chartTypeSelect.style.display = 'flex';
+            tableContainer.style.display = 'block';
+            chartContainer.style.display = 'block';
+            break;
+    }
+}
+
+function setupFormSubmission() {
+    document.getElementById('report-filters').addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateReport();
+    });
+}
+
+function generateReport() {
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    const noResults = document.querySelector('.no-results');
+    const reportSummary = document.querySelector('.report-summary');
+    const tableContainer = document.querySelector('.table-container');
+    const chartContainer = document.querySelector('.chart-container');
+    
+    // Mostrar loading
+    loadingIndicator.style.display = 'flex';
+    noResults.style.display = 'none';
+    reportSummary.style.display = 'none';
+    tableContainer.style.display = 'none';
+    chartContainer.style.display = 'none';
+    
+    // Simular processamento
+    setTimeout(() => {
+        const reportType = document.getElementById('report-type').value;
+        const reportData = getReportData(reportType);
+        
+        renderSummary(reportData.summary);
+        renderTable(reportData.tableData);
+        renderChart(reportData.chartData);
+        
+        loadingIndicator.style.display = 'none';
+        reportSummary.style.display = 'block';
+        
+        const activeView = document.querySelector('.btn-view.active').dataset.view;
+        updateView(activeView);
+    }, 1500);
+}
+
+function generateSampleReport() {
+    const reportType = 'vendas-por-periodo';
+    document.getElementById('report-type').value = reportType;
+    updateGroupByOptions(reportType);
+    updateFilterByOptions(reportType);
+    
+    // Simular clique no botão "Gerar Relatório"
+    setTimeout(() => {
+        document.querySelector('.btn-generate').click();
+    }, 500);
+}
+
+function getReportData(reportType) {
+    // Dados mockados - em produção viria de uma API
+    const data = {
+        'vendas-por-periodo': {
+            summary: {
+                total: 28750,
+                count: 42,
+                average: 684.52,
+                activeCustomers: 15
+            },
+            tableData: [
+                // ... dados da tabela ...
+            ],
+            chartData: {
+                labels: ['01/07', '02/07', '03/07', '04/07', '05/07', '06/07', '07/07'],
+                datasets: [{
+                    label: 'Vendas Diárias',
+                    data: [3200, 4100, 2850, 3750, 5200, 3900, 4500]
+                }]
+            }
+        },
+        // ... outros tipos de relatório ...
+    };
+    
+    return data[reportType] || {
+        summary: {},
+        tableData: [],
+        chartData: { labels: [], datasets: [] }
+    };
+}
+
+function renderSummary(data) {
+    const container = document.querySelector('.summary-cards');
+    container.innerHTML = '';
+    
+    if (!data) return;
+    
+    createSummaryCard('Total', formatCurrency(data.total), 'total');
+    createSummaryCard('Nº de Vendas', data.count, 'count');
+    createSummaryCard('Ticket Médio', formatCurrency(data.average), 'average');
+    createSummaryCard('Clientes Ativos', data.activeCustomers, 'customers');
+}
+
+function createSummaryCard(title, value, type) {
+    const card = document.createElement('div');
+    card.className = `summary-card ${type}`;
+    
+    const h4 = document.createElement('h4');
+    h4.textContent = title;
+    
+    const p = document.createElement('p');
+    p.className = 'value';
+    p.textContent = value;
+    
+    card.appendChild(h4);
+    card.appendChild(p);
+    document.querySelector('.summary-cards').appendChild(card);
+}
+
+function renderTable(data) {
+    const table = document.querySelector('.report-table');
+    table.innerHTML = '';
+    
+    if (!data || data.length === 0) return;
+    
+    // Criar cabeçalho
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    
+    Object.keys(data[0]).forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = formatHeaderText(key);
+        headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // Criar corpo
+    const tbody = document.createElement('tbody');
+    
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        
+        Object.values(item).forEach(value => {
+            const td = document.createElement('td');
+            td.textContent = formatValue(value);
+            row.appendChild(td);
+        });
+        
+        tbody.appendChild(row);
+    });
+    
+    table.appendChild(tbody);
+}
+
+function renderChart(data, chartType = 'bar') {
+    if (!data || data.labels.length === 0) return;
+    
+    const ctx = document.getElementById('report-chart').getContext('2d');
+    
+    // Destruir gráfico anterior se existir
+    if (window.currentChart) {
+        window.currentChart.destroy();
+    }
+    
+    window.currentChartData = data; // Salvar dados para recriação
+    
+    window.currentChart = new Chart(ctx, {
+        type: chartType,
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: document.getElementById('report-type').selectedOptions[0].text
+                },
+                legend: {
+                    position: chartType === 'pie' || chartType === 'donut' ? 'right' : 'top'
+                }
+            }
+        }
+    });
+}
+
+// Funções auxiliares
+function formatOptionText(text) {
+    return text.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+}
+
+function formatHeaderText(text) {
+    return text.split('_').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+}
+
+function formatValue(value) {
+    if (typeof value === 'number') {
+        if (value.toString().includes('.')) {
+            return formatCurrency(value);
+        }
+        return value.toLocaleString('pt-BR');
+    }
+    return value;
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(value);
+}
+
+    </script>
+</body>
+</html>
