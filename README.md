@@ -40,4 +40,9 @@ Inclui:
 
 ```bash
 git clone https://github.com/seu-usuario/NexoERP-fullstack.git
-cd NexoERP-fullstack
+cd backend
+npm install
+npx prisma generate
+npx prisma migrate dev
+npm run dev
+
