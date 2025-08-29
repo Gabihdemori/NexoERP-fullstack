@@ -21,9 +21,6 @@ Desenvolvido como Trabalho de Conclusão de Curso (TCC) do curso **Técnico em D
 ## 🧱 Estrutura do Projeto
 
 
----
-
-
 ### 📌 Testes da API
 A documentação de testes automatizados e manuais da API está disponível em:
 
