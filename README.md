@@ -1,4 +1,4 @@
-# 💼 NexoERP - Sistema ERP Fullstack para PMEs
+# 💼 NexoERP - Fullstack 
 
 Este projeto integra **frontend**, **backend** e **documentação** de um sistema ERP simplificado para **Pequenas e Médias Empresas (PMEs)**, com foco em automação de processos e uso da **metodologia ágil Scrum**.
 
